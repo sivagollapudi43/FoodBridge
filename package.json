@@ -1,0 +1,22 @@
+{
+  "name": "foodbridge",
+  "version": "1.0.0",
+  "description": "FoodBridge - Smart Food Donation and Redistribution Platform",
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "start:backend": "npm --prefix backend run start"
+  },
+  "keywords": [
+    "foodbridge",
+    "mern",
+    "food-donation",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC"
+}
+
