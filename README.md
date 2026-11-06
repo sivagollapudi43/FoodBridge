@@ -1,147 +1,125 @@
 # FoodBridge – Smart Food Donation & Redistribution Platform
 
-> A production-ready MERN stack foundation connecting surplus food donors (restaurants, caterers, supermarkets) with verified NGOs, shelters, and local volunteers to eliminate hunger and reduce food waste.
+> A production-grade, full-stack MERN platform connecting surplus food donors (restaurants, hotels, supermarkets, caterers) with verified NGOs, shelters, and volunteer couriers to eliminate food waste and fight hunger.
+
+[![Tech Stack](https://img.shields.io/badge/Stack-MERN%20(React%20%2B%20Node%20%2B%20Express%20%2B%20Mongo)-10b981)](https://github.com/sivagollapudi43/FoodBridge)
+[![Real-Time](https://img.shields.io/badge/Real--Time-Socket.IO-blue)](https://socket.io/)
+[![Security](https://img.shields.io/badge/Security-JWT%20%2B%20bcrypt%20%2B%20RBAC%20%2B%20Helmet-emerald)](https://github.com/sivagollapudi43/FoodBridge)
 
 ---
 
-## 🚀 Tech Stack
+## 🌟 Key Features by User Role
 
-- **Frontend**: React 18, Vite, Tailwind CSS, Lucide React
-- **Backend**: Node.js (ES Modules), Express.js
-- **Database**: MongoDB & Mongoose ODM
-- **Authentication**: JWT & bcryptjs (ready for Auth modules)
-- **Tooling**: Nodemon, PostCSS, Autoprefixer
+### 🥘 1. Donor Portal (Restaurants, Caterers, Supermarkets)
+- **Fast Food Listing**: Post surplus food with quantity, packaging condition, storage condition (Room Temp, Refrigerated, Hot Holding), allergens, and pickup window.
+- **Automated Estimated Meals**: Automatically computes meals saved based on portion and weight algorithms.
+- **Smart NGO Recommendations**: Rule-based scoring engine ranks the closest, verified, and highest-capacity NGOs.
+- **Claim Request Management**: Accept or decline incoming NGO claims. Accepting claims automatically generates a dual-point pickup handshake code.
+- **Live Statistics**: Real-time tracking of active listings, meals saved, and waste diverted.
+
+### 🤝 2. NGO Organization Portal (Shelters & Charities)
+- **Surplus Food Marketplace**: Search by food title, filter by category (Prepared Meals, Bakery, Fruits/Vegetables, etc.), and sort by urgent collection deadlines.
+- **One-Click Claim Submission**: Specify beneficiary counts and distribution purpose.
+- **Volunteer Courier Dispatch**: Assign active volunteers with vehicle profiles (bicycle, motorcycle, car, van) to pick up food.
+- **Verification Governance**: Verification state management to guarantee hygiene standards.
+
+### 🛵 3. Volunteer Courier Portal
+- **Mission Control**: View assigned pickups with donor contact, street address, and one-click Google Maps routing.
+- **Dual-Point Handshake Verification**:
+  1. *Pickup Handshake*: Input donor's 6-digit confirmation code / QR to mark food as `Collected`.
+  2. *Delivery Handshake*: Input shelter's 6-digit confirmation code to mark food as `Delivered`.
+- **Availability Toggle**: Set status to Active or Off-Duty.
+
+### 🛡️ 4. Administrator Command Center
+- **System Telemetry & KPIs**: Real-time metrics for total users, active listings, meals redistributed, and CO₂ mitigated.
+- **Visual Analytics**: Interactive Recharts graphs showing 7-day donation flow and food category distributions.
+- **NGO Partner Verification**: Review NGO registration certificates and approve/reject with 1 click.
+- **User Governance**: Suspend or reactivate user accounts.
+- **Immutable Audit Trail**: Chronological event logs for all critical system mutations.
 
 ---
 
-## 📁 Scalable Project Structure
+## ⚡ Quick Start: Demo Login Accounts
+
+All accounts are pre-seeded with realistic data:
+
+| Role | Email | Password | Details |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `admin@foodbridge.org` | `password123` | Full administrative command access |
+| **Donor** | `donor@greenplate.com` | `password123` | Green Plate Bistro (Verified Restaurant) |
+| **NGO (Verified)** | `ngo@hopefeed.org` | `password123` | Hope Feed Foundation (Active NGO) |
+| **NGO (Pending)** | `ngo@citycare.org` | `password123` | City Care Shelter (Under admin review) |
+| **Volunteer** | `volunteer@speedy.com` | `password123` | Kiran Kumar (Active Motorcycle Courier) |
+
+*(Quick 1-click buttons are also available directly on the `/login` page for fast testing!)*
+
+---
+
+## 🏃 Running Locally
+
+### Prerequisites
+- Node.js (v18+)
+- MongoDB (Local instance or MongoDB Atlas URI)
+
+### 1. Backend Setup
+```bash
+cd backend
+npm install
+npm run seed       # Seeds realistic sample data and users
+npm run dev        # Starts backend API on http://localhost:5000
+```
+
+### 2. Frontend Setup
+In a second terminal:
+```bash
+cd frontend
+npm install
+npm run dev        # Starts React frontend on http://localhost:5173
+```
+
+---
+
+## 🧪 Automated End-to-End Testing
+
+Run the full 16-step integration workflow test:
+```bash
+cd backend
+npm test
+```
+
+Verifies:
+- Health check
+- Role-based authorization & security barriers
+- Listing creation & safety validation
+- Rule-based NGO smart matching calculation
+- Atomic donation claim reservation (prevents double claims)
+- Volunteer courier assignment
+- Handshake verification codes for collection & delivery
+- Socket.IO real-time notification dispatch
+
+---
+
+## 📁 Architecture Overview
 
 ```text
 FoodBridge/
 ├── backend/
 │   ├── src/
-│   │   ├── config/
-│   │   │   └── db.js               # MongoDB connection logic & event listeners
-│   │   ├── controllers/            # Request handlers (business logic)
-│   │   ├── middleware/
-│   │   │   └── errorHandler.js     # Global 404 & centralized error handler
-│   │   ├── models/                 # Mongoose schemas (User, Donation, Claim, etc.)
-│   │   ├── routes/
-│   │   │   └── health.routes.js    # API & Database health check endpoint
-│   │   ├── utils/                  # Reusable utility functions
-│   │   ├── app.js                  # Express app setup, CORS & middleware
-│   │   └── server.js               # Entry point, environment loader & HTTP listener
-│   ├── .env                        # Local environment variables
-│   ├── .env.example                # Example environment template
-│   ├── .gitignore
-│   └── package.json
+│   │   ├── config/             # DB & MongoDB lifecycle listeners
+│   │   ├── controllers/        # Auth, Donation, Request, Delivery, Admin, Notification
+│   │   ├── middleware/         # JWT protect, RBAC authorize, Error handling
+│   │   ├── models/             # All 10 Mongoose schemas (User, Org, Donation, Delivery, etc.)
+│   │   ├── routes/             # RESTful API routes
+│   │   ├── services/           # Smart NGO matching algorithm
+│   │   ├── sockets/            # Socket.IO real-time notification engine
+│   │   ├── tests/              # End-to-end integration test runner
+│   │   └── utils/              # Database seeder, audit logger, token generator
 │
 ├── frontend/
-│   ├── public/
 │   ├── src/
-│   │   ├── assets/                 # Static media and graphics
-│   │   ├── components/
-│   │   │   ├── common/
-│   │   │   │   ├── Navbar.jsx      # Responsive header with mobile menu
-│   │   │   │   ├── Footer.jsx      # Platform links and standards
-│   │   │   │   └── ApiStatusBadge.jsx # Real-time API & DB connection indicator
-│   │   │   └── home/
-│   │   │       ├── HeroSection.jsx     # Value proposition & primary CTAs
-│   │   │       ├── ImpactMetrics.jsx   # Meals saved, partner counts, CO2 metric
-│   │   │       ├── UserRolesSection.jsx# Donor, NGO, and Volunteer pillars
-│   │   │       ├── HowItWorks.jsx      # 4-step smart redistribution flow
-│   │   │       └── CtaSection.jsx      # Secondary call-to-action banner
-│   │   ├── pages/
-│   │   │   └── HomePage.jsx        # Landing page layout
-│   │   ├── services/
-│   │   │   └── api.js              # Fetch client & health check service
-│   │   ├── App.jsx                 # Root application wrapper
-│   │   ├── index.css               # Tailwind CSS directives
-│   │   └── main.jsx                # React DOM entry point
-│   ├── .env                        # Frontend environment variables
-│   ├── .env.example
-│   ├── index.html                  # HTML template with FoodBridge branding
-│   ├── tailwind.config.js          # Custom brand color palette
-│   ├── postcss.config.js
-│   ├── vite.config.js              # Vite configuration with API proxy
-│   └── package.json
-│
-├── .gitignore
-├── package.json                    # Root convenience scripts
-└── README.md
+│   │   ├── components/         # Common UI & Home sections
+│   │   ├── context/            # AuthContext, SocketContext
+│   │   ├── layouts/            # PublicLayout & DashboardLayout (Sidebar, Top Nav)
+│   │   ├── pages/              # Public (Marketplace, About, Contact) & Dashboards (Donor, NGO, Volunteer, Admin)
+│   │   └── services/           # Axios instance with JWT interceptor
 ```
-
----
-
-## ⚙️ Environment Variables
-
-### Backend (`backend/.env`)
-
-```env
-PORT=5000
-NODE_ENV=development
-MONGO_URI=mongodb://127.0.0.1:27017/foodbridge
-CLIENT_URL=http://localhost:5173
-JWT_SECRET=supersecret_jwt_key_change_in_production_foodbridge_2026
-JWT_EXPIRES_IN=7d
-```
-
-### Frontend (`frontend/.env`)
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
----
-
-## 🏃 Running the Application
-
-### 1. Start the Backend Server
-
-```bash
-cd backend
-npm run dev
-```
-
-- Server will start at: `http://localhost:5000`
-- API Health Status: `http://localhost:5000/api/health`
-
-### 2. Start the Frontend Application
-
-Open a second terminal:
-
-```bash
-cd frontend
-npm run dev
-```
-
-- Frontend will start at: `http://localhost:5173`
-- The live status badge in the navbar will automatically connect to `http://localhost:5000/api/health` and display **API Online** and **DB: Connected**.
-
----
-
-## 🔍 Verification & Health Check
-
-You can verify the backend API and database connection directly via curl or browser:
-
-```bash
-curl http://localhost:5000/api/health
-```
-
-Expected JSON Response:
-
-```json
-{
-  "success": true,
-  "platform": "FoodBridge API",
-  "status": "Healthy",
-  "timestamp": "...",
-  "uptime": "...",
-  "database": {
-    "status": "Connected",
-    "readyState": 1
-  },
-  "version": "1.0.0"
-}
-```
-
