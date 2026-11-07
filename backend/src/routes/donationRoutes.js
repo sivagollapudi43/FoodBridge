@@ -2,24 +2,21 @@ import express from 'express';
 import {
   createDonation,
   getDonations,
-  getDonationById,
-  getMyDonations,
-  getDonorStats,
-  getRecommendedNGOs,
+  getMyFood,
+  claimFood,
+  deleteFood,
 } from '../controllers/donationController.js';
-import { protect, authorize } from '../middleware/auth.js';
+import { protect } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Public routes
+// Public
 router.get('/', getDonations);
-router.get('/my-donations', protect, getMyDonations);
-router.get('/donor-stats', protect, getDonorStats);
-router.get('/:id', getDonationById);
-router.get('/:id/recommendations', protect, getRecommendedNGOs);
 
-// Protected routes
-router.post('/', protect, authorize('donor', 'admin'), createDonation);
+// Private (Any logged-in user or admin)
+router.get('/my-food', protect, getMyFood);
+router.post('/', protect, createDonation);
+router.put('/:id/claim', protect, claimFood);
+router.delete('/:id', protect, deleteFood);
 
 export default router;
-

@@ -1,23 +1,15 @@
 import express from 'express';
-import {
-  getAdminAnalytics,
-  getAllUsers,
-  verifyNgo,
-  updateUserStatus,
-  getAuditLogs,
-} from '../controllers/adminController.js';
-import { protect, authorize } from '../middleware/auth.js';
+import { getAdminOverview, deleteUser } from '../controllers/adminController.js';
+import { deleteFood } from '../controllers/donationController.js';
+import { protect, adminOnly } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Restrict all routes to admin
-router.use(protect, authorize('admin'));
+// Apply admin protection to all routes
+router.use(protect, adminOnly);
 
-router.get('/analytics', getAdminAnalytics);
-router.get('/users', getAllUsers);
-router.put('/verify-ngo/:id', verifyNgo);
-router.put('/users/:id/status', updateUserStatus);
-router.get('/audit-logs', getAuditLogs);
+router.get('/overview', getAdminOverview);
+router.delete('/users/:id', deleteUser);
+router.delete('/food/:id', deleteFood);
 
 export default router;
-
