@@ -132,11 +132,11 @@ export default function LoginPage() {
             </button>
             <button
               type="button"
-              onClick={() => fillDemo('admin@foodbridge.org', 'admin')}
+              onClick={() => fillDemo('sivagollapudi43@gmail.com', 'admin')}
               className="p-2 rounded-lg border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/50 text-slate-700 text-left font-medium transition-colors"
             >
               🛡️ <strong>Admin</strong>
-              <span className="block text-[10px] text-slate-400">Platform Admin</span>
+              <span className="block text-[10px] text-slate-400">sivagollapudi43</span>
             </button>
           </div>
         </div>
@@ -151,3 +151,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

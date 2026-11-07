@@ -138,3 +138,4 @@ export const matchNGOsForDonation = async (donation) => {
   // Sort descending by score
   return rankedNGOs.sort((a, b) => b.matchScore - a.matchScore);
 };
+

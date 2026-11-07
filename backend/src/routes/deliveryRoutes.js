@@ -22,3 +22,4 @@ router.put('/:id/verify-pickup', protect, verifyPickup);
 router.put('/:id/verify-delivery', protect, verifyDelivery);
 
 export default router;
+

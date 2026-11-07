@@ -58,3 +58,4 @@ const donationRequestSchema = new mongoose.Schema(
 donationRequestSchema.index({ donation: 1, ngo: 1 }, { unique: true });
 
 export default mongoose.model('DonationRequest', donationRequestSchema);
+

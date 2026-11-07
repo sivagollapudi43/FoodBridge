@@ -107,3 +107,4 @@ const organizationSchema = new mongoose.Schema(
 organizationSchema.index({ location: '2dsphere' });
 
 export default mongoose.model('Organization', organizationSchema);
+

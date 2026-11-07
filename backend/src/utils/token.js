@@ -12,3 +12,4 @@ export const generateToken = (userId, role) => {
     }
   );
 };
+

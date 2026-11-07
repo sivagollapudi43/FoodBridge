@@ -20,3 +20,4 @@ router.put('/users/:id/status', updateUserStatus);
 router.get('/audit-logs', getAuditLogs);
 
 export default router;
+

@@ -91,3 +91,4 @@ export const emitToRole = (role, event, data) => {
     ioInstance.to(`role_${role}`).emit(event, data);
   }
 };
+

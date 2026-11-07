@@ -31,7 +31,7 @@ export const seedDatabase = async () => {
     // 1. Admin
     const admin = await User.create({
       name: 'System Administrator',
-      email: 'admin@foodbridge.org',
+      email: 'sivagollapudi43@gmail.com',
       password: 'password123',
       role: 'admin',
       phone: '+91 98765 43210',
@@ -311,7 +311,7 @@ export const seedDatabase = async () => {
     console.log('[Seeder] Database successfully populated with realistic FoodBridge test data!');
     console.log('========================================================================');
     console.log(' Demo Login Credentials:');
-    console.log(' - Admin:      admin@foodbridge.org   / password123');
+    console.log(' - Admin:      sivagollapudi43@gmail.com / password123');
     console.log(' - Donor:      donor@greenplate.com   / password123');
     console.log(' - NGO (Ver):  ngo@hopefeed.org       / password123');
     console.log(' - NGO (Pend): ngo@citycare.org       / password123');
@@ -336,3 +336,4 @@ function inFourHoursOr(d) {
 if (process.argv[1]?.includes('seeder.js')) {
   seedDatabase();
 }
+

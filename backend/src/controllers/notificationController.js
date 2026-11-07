@@ -77,3 +77,4 @@ export const markAllAsRead = async (req, res) => {
     });
   }
 };
+

@@ -49,3 +49,4 @@ const volunteerAssignmentSchema = new mongoose.Schema(
 );
 
 export default mongoose.model('VolunteerAssignment', volunteerAssignmentSchema);
+

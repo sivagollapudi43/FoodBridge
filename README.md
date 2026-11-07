@@ -45,7 +45,7 @@ All accounts are pre-seeded with realistic data:
 
 | Role | Email | Password | Details |
 | :--- | :--- | :--- | :--- |
-| **Admin** | `admin@foodbridge.org` | `password123` | Full administrative command access |
+| **Admin** | `sivagollapudi43@gmail.com` | `password123` | Full administrative command access |
 | **Donor** | `donor@greenplate.com` | `password123` | Green Plate Bistro (Verified Restaurant) |
 | **NGO (Verified)** | `ngo@hopefeed.org` | `password123` | Hope Feed Foundation (Active NGO) |
 | **NGO (Pending)** | `ngo@citycare.org` | `password123` | City Care Shelter (Under admin review) |
