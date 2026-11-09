@@ -13,7 +13,7 @@ export const SocketProvider = ({ children }) => {
     // Socket server host
     const socketUrl = import.meta.env.VITE_API_URL
       ? import.meta.env.VITE_API_URL.replace('/api', '')
-      : 'http://localhost:5000';
+      : 'https://foodbridge-6egf.onrender.com';
 
     const newSocket = io(socketUrl, {
       transports: ['websocket', 'polling'],

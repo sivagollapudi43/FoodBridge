@@ -43,7 +43,7 @@ export default function RegisterPage() {
       const msg =
         err.response?.data?.message ||
         (err.message === 'Network Error'
-          ? 'Cannot connect to server. Please ensure the backend server is running on port 5000.'
+          ? 'Cannot connect to server. Please ensure the backend server is reachable at https://foodbridge-6egf.onrender.com.'
           : err.message) ||
         'Registration failed. Please check inputs.';
       setError(msg);
