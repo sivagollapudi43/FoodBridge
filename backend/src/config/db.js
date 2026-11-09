@@ -1,4 +1,14 @@
 import mongoose from 'mongoose';
+import dns from 'dns';
+
+/**
+ * Configure DNS fallback for MongoDB SRV records on Windows networks
+ */
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+} catch (err) {
+  // Ignore if custom DNS cannot be set
+}
 
 /**
  * Establishes connection to MongoDB database
@@ -8,7 +18,7 @@ export const connectDB = async () => {
 
   try {
     const conn = await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds instead of hanging
+      serverSelectionTimeoutMS: 8000,
     });
 
     console.log(`[MongoDB] Connected successfully to host: ${conn.connection.host}`);
@@ -28,4 +38,3 @@ mongoose.connection.on('disconnected', () => {
 mongoose.connection.on('reconnected', () => {
   console.log('[MongoDB] Database reconnected.');
 });
-
