@@ -40,7 +40,13 @@ export default function RegisterPage() {
         }
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed. Please check inputs.');
+      const msg =
+        err.response?.data?.message ||
+        (err.message === 'Network Error'
+          ? 'Cannot connect to server. Please ensure the backend server is running on port 5000.'
+          : err.message) ||
+        'Registration failed. Please check inputs.';
+      setError(msg);
     } finally {
       setLoading(false);
     }

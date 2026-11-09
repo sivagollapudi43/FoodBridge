@@ -28,7 +28,13 @@ export default function LoginPage() {
         }
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid email or password');
+      const msg =
+        err.response?.data?.message ||
+        (err.message === 'Network Error'
+          ? 'Cannot connect to server. Please ensure the backend server is running on port 5000.'
+          : err.message) ||
+        'Invalid email or password';
+      setError(msg);
     } finally {
       setLoading(false);
     }
