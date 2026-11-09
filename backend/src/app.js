@@ -9,10 +9,10 @@ import { notFound, errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
-const allowedOrigin = process.env.CLIENT_URL || 'http://localhost:5173';
+// CORS setup: allow any frontend domain (localhost, Vercel, Netlify)
 app.use(
   cors({
-    origin: [allowedOrigin, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: true,
     credentials: true,
   })
 );
